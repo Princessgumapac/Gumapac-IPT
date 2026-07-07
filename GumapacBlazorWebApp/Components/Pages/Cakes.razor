@@ -1,0 +1,270 @@
+﻿@page "/Cakes"
+@rendermode InteractiveServer
+<PageTitle>SLICED CAKES MENU</PageTitle>
+
+<div class="bg-image"></div>
+
+<div class="bakery-menu">
+    <div class="menu-header">
+        <h1>SLICED CAKES MENU</h1>
+        <p>Sweet slices made to make your day better</p>
+    </div>
+
+    <!-- 1. CHOCOLATE -->
+    <div class="menu-item item-choco">
+        <img src="images/chocolatecake.jpg" alt="choco" />
+        <div class="item-details">
+            <h3>CHOCOLATE SLICE CAKE</h3>
+            <p>Soft and moist chocolate pound cake full of chocolate goodness. Classic chocolate chiffon filled with rich chocolate fudge.</p>
+            <div class="item-footer">
+                <span class="price">₱120.00</span>
+                <span class="badge">Best Seller</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. UBE -->
+    <div class="menu-item item-ube">
+        <img src="images/Ube-Cake.jpg" alt="ube" />
+        <div class="item-details">
+            <h3>UBE SLICE CAKE</h3>
+            <p>Layers of light and airy ube chiffon, infused with real Philippine Ube Halaya and covered with creamy ube frosting.</p>
+            <div class="item-footer">
+                <span class="price">₱110.00</span>
+                <span class="badge">Pinoy Favorite</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. MANGO -->
+    <div class="menu-item item-mango">
+        <img src="images/mangocake.jpg" alt="mango" />
+        <div class="item-details">
+            <h3>MANGO SLICE CAKE</h3>
+            <p>Soft vanilla sponge layered with sweet mango whipped cream. Topped with fresh juicy mango chunks.</p>
+            <div class="item-footer">
+                <span class="price">₱110.00</span>
+                <span class="badge">Summer Special</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MOCHA -->
+    <div class="menu-item item-mocha">
+        <img src="images/mochacake.jpg" alt="mocha" />
+        <div class="item-details">
+            <h3>MOCHA SLICE CAKE</h3>
+            <p>Mocha-marble chiffon slice filled with light buttercream. A timeless and affordable dessert.</p>
+            <div class="item-footer">
+                <span class="price">₱110.00</span>
+                <span class="badge">Classic</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. STRAWBERRY -->
+    <div class="menu-item item-straw">
+        <img src="images/strawcake.jpg" alt="strawberry" />
+        <div class="item-details">
+            <h3>STRAWBERRY SLICE CAKE</h3>
+            <p>Rich cheesecake base with fruity strawberry flavor. Topped with glossy strawberry coulis and fresh fruit.</p>
+            <div class="item-footer">
+                <span class="price">₱105.00</span>
+                <span class="badge">My Greatest Love</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* BACKGROUND IMAGE */
+    .bg-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('images/pink.jpg'); /* PUT YOUR PHOTO HERE */
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        filter: brightness(0.55) blur(2px);
+        z-index: -2;
+    }
+
+        .bg-image::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 249, 240, 0.88); /* warm cream overlay */
+            z-index: -1;
+        }
+
+    .bakery-menu {
+        max-width: 950px;
+        margin: 40px auto;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* HEADER */
+    .menu-header {
+        text-align: center;
+        margin-bottom: 50px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        border: 3px dashed #f8bbd0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+        .menu-header h1 {
+            color: #ad1457;
+            font-size: 2.8rem;
+            margin: 0;
+            letter-spacing: 3px;
+        }
+
+        .menu-header p {
+            color: #6d4c41;
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+    /* MENU ITEM BASE */
+    .menu-item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 35px;
+        padding: 20px;
+        border-radius: 18px;
+        background-color: rgba(255, 255, 255, 0.97);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        border-left: 8px solid;
+    }
+
+        .menu-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .menu-item img {
+            width: 220px;
+            height: 160px;
+            flex-shrink: 0;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+    .item-details {
+        flex: 1;
+        min-width: 250px;
+        padding-left: 20px;
+    }
+
+        .item-details h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+        }
+
+        .item-details p {
+            color: #555;
+            line-height: 1.6;
+            margin: 0 0 12px 0;
+        }
+
+    .item-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .price {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #2e7d32;
+    }
+
+    .badge {
+        background-color: #f1f8e9;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    /* COLOR THEME PER CAKE */
+    .item-choco {
+        border-left-color: #8d6e63;
+    }
+
+        .item-choco h3 {
+            color: #5d4037;
+        }
+
+        .item-choco .badge {
+            background-color: #efebe9;
+            color: #5d4037;
+        }
+
+    .item-ube {
+        border-left-color: #ba68c8;
+    }
+
+        .item-ube h3 {
+            color: #8e24aa;
+        }
+
+        .item-ube .badge {
+            background-color: #f3e5f5;
+            color: #8e24aa;
+        }
+
+    .item-mango {
+        border-left-color: #ffb74d;
+    }
+
+        .item-mango h3 {
+            color: #e65100;
+        }
+
+        .item-mango .badge {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+
+    .item-mocha {
+        border-left-color: #a1887f;
+    }
+
+        .item-mocha h3 {
+            color: #4e342e;
+        }
+
+        .item-mocha .badge {
+            background-color: #efebe9;
+            color: #4e342e;
+        }
+
+    .item-straw {
+        border-left-color: #f06292;
+    }
+
+        .item-straw h3 {
+            color: #c2185b;
+        }
+
+        .item-straw .badge {
+            background-color: #fce4ec;
+            color: #c2185b;
+        }
+</style>
