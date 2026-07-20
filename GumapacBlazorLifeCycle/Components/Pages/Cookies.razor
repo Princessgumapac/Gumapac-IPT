@@ -1,0 +1,129 @@
+﻿@page "/cookies"
+@rendermode InteractiveServer
+<PageTitle>Yan's Cookies</PageTitle>
+
+<div class="page-wrapper">
+    <!-- Banner -->
+    <div class="banner text-center">
+        <a href="/" class="btn-back">← Back to Home</a>
+        <h1 class="display-4 fw-bold">🍪 Yan's Cookies</h1>
+        <p class="lead">Freshly Baked Daily</p>
+    </div>
+
+    <div class="container mt-4">
+        <p class="text-center text-muted mb-4">Pick your favorite cookie flavors!</p>
+
+        <!-- Menu List - Horizontal Cards -->
+        <div class="menu-list">
+            @foreach (var cookie in cookieMenu)
+            {
+                <div class="menu-row">
+                    <div class="img-wrap">
+                        <img src="@cookie.ImageUrl" alt="@cookie.Name" onerror="this.src='/images/placeholder.jpg'" />
+                        @if (GetQuantity(cookie.Name) > 0)
+                        {
+                            <span class="qty-badge">@GetQuantity(cookie.Name)</span>
+                        }
+                    </div>
+                    <div class="menu-info">
+                        <div>
+                            <h5>@cookie.Emoji @cookie.Name</h5>
+                            <p>@cookie.Description</p>
+                        </div>
+                        <div class="menu-actions">
+                            <span class="price">₱@cookie.Price</span>
+                            <button class="btn-add" @onclick="() => AddToCart(cookie)">+ Add</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Cart Section -->
+        <div class="cart-section mt-5">
+            <h3>🛍️ Your Bag <span class="badge">@cart.Sum(x => x.Quantity)</span></h3>
+
+            @if (cart.Count == 0)
+            {
+                <p class="empty-cart">Your bag is empty. Add some cookies!</p>
+            }
+            else
+            {
+                <div class="cart-items">
+                    @foreach (var item in cart)
+                    {
+                        <div class="cart-item">
+                            <div class="d-flex align-items-center gap-3">
+                                <img src="@item.ImageUrl" class="cart-thumb" onerror="this.src='/images/placeholder.jpg'" />
+                                <div>
+                                    <strong>@item.Emoji @item.Name</strong>
+                                    <div class="qty-controls">
+                                        <button @onclick="() => DecreaseQty(item)">-</button>
+                                        <span>@item.Quantity</span>
+                                        <button @onclick="() => IncreaseQty(item)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">₱@(item.Price * item.Quantity)</div>
+                                <button class="btn-remove" @onclick="() => RemoveItem(item)">✕</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="cart-total">
+                    <div>
+                        <h4>Total: ₱@cart.Sum(x => x.Price * x.Quantity)</h4>
+                        <small class="text-muted">@cart.Sum(x => x.Quantity) items</small>
+                    </div>
+                    <button class="btn-checkout" @onclick="PlaceOrder">Checkout</button>
+                </div>
+            }
+        </div>
+
+        @if (!string.IsNullOrEmpty(orderMessage))
+        {
+            <div class="alert-order">
+                @orderMessage
+                <a href="/" class="btn-home-after">🏠 Go Back to Home</a>
+            </div>
+        }
+    </div>
+</div>
+
+
+@code {
+    private List<CartItem> cart = new();
+    private string orderMessage = "";
+
+    private List<Cookie> cookieMenu = new()
+    {
+        new Cookie { Name = "Chocolate Chip Cookies", Price = 35, Description = "Classic McDo cookie with chocolate chunks", Emoji = "🍪", ImageUrl = "/images/c1.jpg" },
+        new Cookie { Name = "Double Chocolate Cookies", Price = 40, Description = "For chocoholics - double chocolate", Emoji = "🍫", ImageUrl = "/images/c2.jpg" },
+        new Cookie { Name = "White Chocolate Macadamia", Price = 45, Description = "Premium flavor with macadamia nuts", Emoji = "🥛", ImageUrl = "/images/c3.jpg" },
+        new Cookie { Name = "Red Velvet Cookies", Price = 40, Description = "Soft and fudgy with cream cheese", Emoji = "❤️", ImageUrl = "/images/c4.jpg" },
+        new Cookie { Name = "Matcha Cookies", Price = 45, Description = "Green tea goodness, soft and chewy", Emoji = "🍵", ImageUrl = "/images/c5.jpg" }
+    };
+
+    private void AddToCart(Cookie cookie)
+    {
+        var existing = cart.FirstOrDefault(x => x.Name == cookie.Name);
+        if (existing != null) existing.Quantity++;
+        else cart.Add(new CartItem { Name = cookie.Name, Price = cookie.Price, Emoji = cookie.Emoji, ImageUrl = cookie.ImageUrl, Quantity = 1 });
+    }
+    private void IncreaseQty(CartItem item) => item.Quantity++;
+    private void DecreaseQty(CartItem item) { item.Quantity--; if (item.Quantity <= 0) cart.Remove(item); }
+    private void RemoveItem(CartItem item) => cart.Remove(item);
+    private int GetQuantity(string name) => cart.FirstOrDefault(x => x.Name == name)?.Quantity ?? 0;
+
+    private void PlaceOrder()
+    {
+        var total = cart.Sum(x => x.Price * x.Quantity);
+        orderMessage = $"Order placed! Total: ₱{total}. Your cookies will be ready soon! 🍪";
+        cart.Clear();
+    }
+
+    public class Cookie { public string Name { get; set; } = ""; public int Price { get; set; } public string Description { get; set; } = ""; public string Emoji { get; set; } = ""; public string ImageUrl { get; set; } = ""; }
+    public class CartItem : Cookie { public int Quantity { get; set; } }
+}
