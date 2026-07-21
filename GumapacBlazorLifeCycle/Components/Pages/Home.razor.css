@@ -1,115 +1,181 @@
-.bg-image {
-    position: fixed;
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    /* BACKGROUND IMAGE + GRADIENT */
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.85) 0%, rgba(255, 105, 180, 0.75) 100%), url('https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1931') center/cover fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.overlay {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('pic/cok.jpeg'); /*put your photo here*/
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    filter: brightness(0.6);
-    z-index: -2;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
 }
 
-    .bg-image::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 240, 245, 0.4); /* soft pink overlay */
-        z-index: -1;
-        pointer-events: none;
-    }
-
-/* CENTER CONTENT */
-.home-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* WELCOME CARD */
-.welcome-card {
-    background-color: rgba(255, 255, 255, 0.95);
-    border: 8px solid #ffb6c1; /* light pink border */
-    border-radius: 30px;
-    padding: 60px 50px;
+.hero-content {
+    position: relative;
+    z-index: 2;
     text-align: center;
-    max-width: 600px;
-    width: 100%;
-    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
-    outline: 4px dashed #ffc0cb; /* frosting effect */
-    outline-offset: 10px;
-    transition: transform 0.3s ease;
+    color: white;
+    padding: 20px;
 }
 
-    .welcome-card:hover {
-        transform: translateY(-8px); /* hover effect instead of animation */
+.welcome-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 60px 70px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    backdrop-filter: blur(12px);
+    border: 3px solid #FFB6C1;
+    animation: floatUp 1s ease-out;
+    max-width: 600px;
+}
+
+@@keyframes floatUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
     }
 
-/* TEXT */
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .logo {
-    font-size: 4rem;
-    margin-bottom: 10px;
+    font-size: 5rem;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+    filter: drop-shadow(0 4px 8px rgba(255,105,180,0.3));
+}
+
+@@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(5deg);
+    }
 }
 
 .welcome-card h1 {
-    color: #d81b60; /* hot pink */
-    font-size: 2.5rem;
-    margin: 10px 0;
-    font-weight: 900;
+    color: #FF1493;
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-family: 'Pacifico', cursive; /* Cute cursive font */
+    letter-spacing: 1px;
 }
 
 .tagline {
-    color: #6d4c41; /* chocolate */
-    font-size: 1.2rem;
-    font-style: italic;
-    margin-bottom: 5px;
+    color: #555;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    font-weight: 400;
 }
 
 .cta {
-    color: #c2185b; /* dark pink */
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 30px;
+    color: #FF69B4;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 35px;
 }
 
-/* BUTTONS */
 .buttons {
     display: flex;
-    gap: 15px;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 .btn {
-    padding: 14px 30px;
+    padding: 18px 55px;
     border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.3rem;
     text-decoration: none;
-    font-weight: 800;
-    font-size: 1.1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    display: inline-block;
 }
 
-.btn-pink {
-    background-color: #ff4081;
+.btn-main {
+    background: linear-gradient(90deg, #FF69B4 0%, #FF1493 100%);
     color: white;
+    box-shadow: 0 8px 25px rgba(255,105,180,0.4);
 }
 
-.btn-yellow {
-    background-color: #ffc107;
-    color: #5d4037;
+    .btn-main:hover {
+        background: linear-gradient(90deg, #FF1493 0%, #C71585 100%);
+        transform: scale(1.08) translateY(-3px);
+        box-shadow: 0 12px 35px rgba(255,20,147,0.5);
+    }
+
+/* Floating Cookies Animation */
+.cookie-float {
+    position: absolute;
+    font-size: 4.5rem;
+    opacity: 0.15;
+    animation: float 7s ease-in-out infinite;
+    z-index: 1;
 }
 
-.btn:hover {
-    transform: scale(1.08) translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    .cookie-float:nth-child(2) {
+        top: 10%;
+        left: 10%;
+    }
+
+    .cookie-float.delay1 {
+        top: 75%;
+        right: 12%;
+        animation-delay: 1.5s;
+    }
+
+    .cookie-float.delay2 {
+        top: 15%;
+        right: 15%;
+        animation-delay: 3s;
+    }
+
+    .cookie-float.delay3 {
+        top: 70%;
+        left: 15%;
+        animation-delay: 4.5s;
+        font-size: 3.5rem;
+    }
+
+@@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-25px) rotate(15deg);
+    }
+}
+
+/* Mobile Responsive */
+@@media (max-width: 768px) {
+    .welcome-card {
+        padding: 40px 30px;
+    }
+
+        .welcome-card h1 {
+            font-size: 2.3rem;
+        }
+
+    .btn {
+        padding: 15px 40px;
+        font-size: 1.1rem;
+    }
+
+    .cookie-float {
+        display: none;
+    }
 }
