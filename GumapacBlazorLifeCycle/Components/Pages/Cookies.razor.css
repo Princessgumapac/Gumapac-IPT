@@ -1,0 +1,275 @@
+.page-wrapper {
+    background: #FFF0F5; /* LIGHT PINK BACKGROUND */
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.banner {
+    background: linear-gradient(90deg, #FF69B4 0%, #FFB6C1 100%); /* PINK GRADIENT */
+    color: white;
+    padding: 50px 20px;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    position: relative;
+    box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+}
+
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    background: white;
+    color: #FF69B4; /* PINK TEXT */
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+    .btn-back:hover {
+        background: #FFB6C1; /* LIGHT PINK HOVER */
+        color: white;
+        transform: translateX(-5px);
+    }
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.menu-row {
+    display: flex;
+    background: white;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(255,105,180,0.1); /* PINK SHADOW */
+    transition: 0.3s;
+    border-left: 5px solid #FFB6C1; /* LIGHT PINK BORDER */
+}
+
+    .menu-row:hover {
+        transform: translateX(8px);
+        border-left-color: #FF69B4; /* HOT PINK HOVER */
+        box-shadow: 0 6px 20px rgba(255,105,180,0.2);
+    }
+
+.img-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+}
+
+    .img-wrap img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #FFB6C1;
+    }
+/* PINK BORDER */
+.qty-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #FF69B4;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: 2px solid white;
+}
+
+.menu-info {
+    flex: 1;
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .menu-info h5 {
+        color: #FF69B4;
+        font-weight: bold;
+        margin: 0;
+    }
+    /* PINK TITLE */
+    .menu-info p {
+        color: #666;
+        font-size: 0.9rem;
+        margin: 5px 0 0 0;
+    }
+
+.menu-actions {
+    text-align: right;
+}
+
+.price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #FF69B4;
+    display: block;
+}
+/* PINK PRICE */
+.btn-add {
+    background: #FFB6C1;
+    color: #000;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-weight: bold;
+    margin-top: 8px;
+    transition: 0.3s;
+}
+    /* LIGHT PINK BUTTON */
+    .btn-add:hover {
+        background: #FF69B4;
+        color: white;
+        transform: scale(1.05);
+    }
+/* HOT PINK HOVER */
+
+/* CART */
+.cart-section {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(255,105,180,0.1);
+    border-top: 5px solid #FF69B4; /* PINK TOP BORDER */
+}
+
+.badge {
+    background: #FF69B4;
+}
+/* PINK BADGE */
+.cart-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #FFB6C1;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #FFB6C1;
+}
+/* PINK DASH */
+.qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+    .qty-controls button {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1px solid #FF69B4;
+        background: white;
+        color: #FF69B4;
+        font-weight: bold;
+    }
+
+        .qty-controls button:hover {
+            background: #FF69B4;
+            color: white;
+        }
+
+.btn-remove {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1.2rem;
+}
+
+    .btn-remove:hover {
+        color: #FF69B4;
+    }
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 2px solid #FFB6C1;
+}
+
+.btn-checkout {
+    background: #FF69B4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+    /* PINK CHECKOUT */
+    .btn-checkout:hover {
+        background: #FF1493;
+    }
+/* DARKER PINK HOVER */
+
+.alert-order {
+    background: #FFE4E1; /* MISTY ROSE */
+    color: #C71585; /* DARK PINK TEXT */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 2px solid #FFB6C1;
+}
+
+.btn-home-after {
+    background: #FF69B4;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+    .btn-home-after:hover {
+        background: #FF1493;
+        transform: scale(1.05);
+    }
+
+.empty-cart {
+    color: #999;
+    text-align: center;
+    padding: 20px;
+}
+
+@@media (max-width: 768px) {
+    .menu-row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu-info {
+        padding-left: 0;
+        padding-top: 15px;
+        flex-direction: column;
+    }
+
+    .btn-back {
+        top: 15px;
+        left: 15px;
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
