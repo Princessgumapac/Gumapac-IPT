@@ -1,0 +1,66 @@
+﻿@page "/Facts"
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<PageTitle>Cat Fact</PageTitle>
+<h1>Cat Facts</h1>
+
+@if (loading)
+{
+    <p>Loading...</p>
+}
+else if (!string.IsNullOrEmpty(error))
+{
+    <p style="color:red;"><b>Error:</b> @error</p>
+    <button @onclick="LoadFact">Try Again</button>
+}
+else if (currentFact != null)
+{
+    <div style="border:1px solid #ddd; padding:20px; border-radius:8px; max-width:600px;">
+        <h2>🐱 Random Cat Fact</h2>
+        <p style="font-size:18px;">@currentFact.Fact</p>
+        <p><b>Length:</b> @currentFact.Length characters</p>
+    </div>
+    <button @onclick="LoadFact" style="margin-top:20px;">Get New Fact</button>
+}
+
+@code {
+    private CatFacts? currentFact;
+    private bool loading = true;
+    private string? error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadFact();
+    }
+
+    private async Task LoadFact()
+    {
+        loading = true;
+        error = null;
+        currentFact = null;
+        try
+        {
+            // Direct call. This WILL fail in WASM due to CORS, but now we’ll see why
+            currentFact = await Http.GetFromJsonAsync<CatFacts>("https://catfact.ninja/fact");
+        }
+        catch (HttpRequestException ex)
+        {
+            error = $"CORS Blocked: {ex.Message}. Blazor WASM can't call external APIs directly.";
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+    public class CatFacts
+    {
+        public string Fact { get; set; } = "";
+        public int Length { get; set; }
+    }
+}

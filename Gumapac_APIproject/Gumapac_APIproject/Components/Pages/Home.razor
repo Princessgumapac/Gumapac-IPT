@@ -1,0 +1,42 @@
+﻿@page "/"
+@using System.Net.Http.Json
+@using GumapacAPIproject.Models
+@inject HttpClient Http
+
+<PageTitle>Home</PageTitle>
+<h1>Cat Breeds Facts</h1>
+
+@if (telemetryData == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ul>
+        @foreach (var cat in telemetryData) // lowercase variable
+        {
+            <li style="margin-bottom: 20px; list-style:none; border-bottom:1px solid #ddd;">
+                <h2>@cat.Breed</h2>
+                <p><b>Country:</b> @cat.Country</p>
+                <p><b>Origin:</b> @cat.Origin</p>
+                <p><b>Coat:</b> @cat.Coat</p>
+                <p><b>Pattern:</b> @cat.Pattern</p>
+            </li>
+        }
+    </ul>
+}
+
+@code {
+	private List<Models.CatBreedAPI>? telemetryData;
+
+	protected override async Task OnInitializedAsync()
+	{
+		string CatBreedAPIURL = "https://catfact.ninja/breeds";
+
+		var response = await Http.GetFromJsonAsync<Models.CatBreedResponse>(CatBreedAPIURL);
+
+        if (response != null)
+            telemetryData = response.Data; // get the list inside "data"
+    }
+}
+

@@ -1,0 +1,40 @@
+﻿@page "/Cat"
+@using System.Net.Http.Json
+@using GumapacAPIproject.Models
+@inject HttpClient Http
+
+<h1>Cat Images</h1>
+
+@if (telemetryData5 == null)
+{
+    <p>Loading...</p>
+}
+else if (!telemetryData5.Any())
+{
+    <p>No images found</p>
+}
+else
+{
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap:20px;">
+        @foreach (var image in telemetryData5)
+        {
+            <div style="margin-bottom: 20px; border:1px solid #ddd; padding:10px; border-radius:8px;">
+                <img src="@image.Url" style="width:100%; height:200px; object-fit:cover;" />
+                <h2>ID: @image.Id</h2>
+                <p><b>URL:</b> <a href="@image.Url" target="_blank">@image.Url</a></p>
+                <p><b>Width:</b> @image.Width</p>
+                <p><b>Height:</b> @image.Height</p>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<CatImage>? telemetryData5;
+
+    protected override async Task OnInitializedAsync()
+    {
+        string CatImageAPIURL = "https://api.thecatapi.com/v1/images/search";
+        telemetryData5 = await Http.GetFromJsonAsync<List<CatImage>>(CatImageAPIURL);
+    }
+}
