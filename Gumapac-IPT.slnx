@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="GumapacBlazorLifeCycle/GumapacBlazorLifeCycle.csproj" Id="f7fc155c-a8f0-4d3a-95b7-acbee9f92a4b" />
+  <Project Path="GumapacBlazorWebApp/GumapacBlazorWebApp.csproj" />
+</Solution>
