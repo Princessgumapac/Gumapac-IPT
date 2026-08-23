@@ -1,0 +1,67 @@
+﻿@page "/aboutme"
+
+<h1>Personal Information</h1>
+
+<div class="card p-3">
+    <p><b>Full Name:</b> Kate G. Sencil</p>
+    <p><b>Student ID:</b> 2024-XXXX</p>
+    <p><b>Program:</b> BSIT</p>
+    <p><b>Year Level:</b> 3rd Year</p>
+    <p><b>Email:</b> kate@email.com</p>
+    <p><b>Contact:</b> 09XX-XXX-XXXX</p>
+    <p><b>Address:</b> General Santos City</p>
+    <hr />
+    <p><b>About Me:</b> I am a BSIT student who loves coding and learning Blazor.</p>
+</div>
+
+@page "/"
+@inject HttpClient Http
+
+<h1>Random Motivational Quotes</h1>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (error != null)
+{
+    <p style="color:red">@error</p>
+}
+else if (Quotes != null)
+{
+    <div class="card p-4 text-center">
+        <h3>"@Quotes.quote"</h3>
+        <p>- @Quotes.author</p>
+        <button class="btn btn-primary" @onclick="GetNewQuote">Get New Quote</button>
+    </div>
+}
+
+@code {
+    private Quotes? quote;
+    private bool isLoading = true;
+    private string? error;
+    private string apiUrl = "https://motivational-spark-api.vercel.app/api/quotes/random";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetNewQuote();
+    }
+
+    private async Task GetNewQuote()
+    {
+        isLoading = true;
+        error = null;
+        try
+        {
+            quote = await Http.GetFromJsonAsync<Quotes>(apiUrl);
+        }
+        catch (Exception ex)
+        {
+            error = $"Failed to load quote: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}
