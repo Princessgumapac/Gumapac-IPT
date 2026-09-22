@@ -1,0 +1,248 @@
+﻿@page "/myprofile"
+
+@using GumapacBlazorWebApp.Components.Models
+@using System.Net.Http.Json
+
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+@rendermode InteractiveServer
+
+<PageTitle>My Profile</PageTitle>
+
+<div class="profile-page">
+
+    <div class="profile-card">
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+
+            <div class="profile-picture">
+                PG
+            </div>
+
+            <h1>@name?.Name</h1>
+
+            <p class="profile-role">
+                @program?.Program
+            </p>
+
+        </div>
+
+
+        <!-- Personal Information -->
+        <div class="section-title">
+
+            <h2>Personal Information</h2>
+
+        </div>
+
+
+        @if (isLoading)
+        {
+            <div class="loading">
+                Loading information...
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="error-message">
+                @errorMessage
+            </div>
+        }
+        else
+        {
+            <div class="information-grid">
+
+                <!-- Age -->
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        🎂
+                    </div>
+
+                    <div class="info-content">
+
+                        <span>Age</span>
+
+                        <strong>
+                            @age?.Age years old
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Birthdate -->
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        📅
+                    </div>
+
+                    <div class="info-content">
+
+                        <span>Birthdate</span>
+
+                        <strong>
+                            @birthdate?.BirthDate
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        ✉
+                    </div>
+
+                    <div class="info-content">
+
+                        <span>Email</span>
+
+                        <strong>
+                            @email?.Email
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Contact -->
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        📱
+                    </div>
+
+                    <div class="info-content">
+
+                        <span>Contact Number</span>
+
+                        <strong>
+                            @contact?.Contact
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Program -->
+                <div class="info-card full-width">
+
+                    <div class="info-icon">
+                        🎓
+                    </div>
+
+                    <div class="info-content">
+
+                        <span>Program</span>
+
+                        <strong>
+                            @program?.Program
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Address -->
+                <div class="info-card full-width">
+
+                    <div class="info-icon">
+                        📍
+                    </div>
+
+                    <div class="info-content">
+
+                        <span>Address</span>
+
+                        <strong>
+                            @address?.Address
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+
+        <!-- Back Button -->
+        <div class="profile-footer">
+
+            <a href="/" class="back-button">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@code {
+
+    private myName? name;
+
+    private myAge? age;
+
+    private myBirthDate? birthdate;
+
+    private myProgram? program;
+
+    private myEmail? email;
+
+    private myAddress? address;
+
+    private myContact? contact;
+
+
+    private bool isLoading = true;
+
+    private string errorMessage = "";
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            name = await Http.GetFromJsonAsync<myName>(
+                $"{Nav.BaseUri}api/name");
+
+            age = await Http.GetFromJsonAsync<myAge>(
+                $"{Nav.BaseUri}api/age");
+
+            birthdate = await Http.GetFromJsonAsync<myBirthDate>(
+                $"{Nav.BaseUri}api/birthdate");
+
+            program = await Http.GetFromJsonAsync<myProgram>(
+                $"{Nav.BaseUri}api/program");
+
+            email = await Http.GetFromJsonAsync<myEmail>(
+                $"{Nav.BaseUri}api/email");
+
+            address = await Http.GetFromJsonAsync<myAddress>(
+                $"{Nav.BaseUri}api/address");
+
+            contact = await Http.GetFromJsonAsync<myContact>(
+                $"{Nav.BaseUri}api/contact");
+        }
+        catch
+        {
+            errorMessage = "Unable to load profile information.";
+        }
+
+        isLoading = false;
+    }
+}
