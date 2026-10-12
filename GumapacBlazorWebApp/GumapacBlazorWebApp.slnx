@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="../GUMAPAC_MAUI/GUMAPAC_MAUI.csproj" Id="0f346800-0529-4eb3-9533-27bf0b0857cf">
+    <Deploy Solution="Debug|*" />
+  </Project>
   <Project Path="GumapacBlazorWebApp.csproj" />
 </Solution>

@@ -1,0 +1,161 @@
+/* CSS for InfoPage component */
+.home-wrapper {
+    padding: 20px;
+    padding-bottom: 90px;
+    background: #f7f7fb;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.header-card {
+    background: linear-gradient(135deg, #111 0%, #333 100%);
+    border-radius: 28px;
+    padding: 22px;
+    color: white;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.badge {
+    background: rgba(255,255,255,0.15);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.live-dot {
+    background: #00ff88;
+    color: #111;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 9px;
+    font-weight: 900;
+}
+
+.profile-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.avatar {
+    width: 54px;
+    height: 54px;
+    background: white;
+    color: #111;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.profile-text h1 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.profile-text p {
+    margin: 2px 0 0 0;
+    font-size: 11px;
+    opacity: 0.6;
+    font-weight: 600;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.stat {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 10px;
+    text-align: center;
+}
+
+    .stat b {
+        display: block;
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    .stat span {
+        font-size: 9px;
+        opacity: 0.6;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+    }
+
+.section-title {
+    margin: 22px 0 10px 4px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #8e8e93;
+}
+
+.info-list {
+    display: grid;
+    gap: 10px;
+}
+
+.info-item {
+    background: white;
+    border: 1px solid #efeff4;
+    border-radius: 16px;
+    padding: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+    .info-item .icon {
+        width: 40px;
+        height: 40px;
+        background: #f5f5f7;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+    }
+
+    .info-item label {
+        display: block;
+        font-size: 9px;
+        font-weight: 800;
+        color: #aaa;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .info-item b {
+        font-size: 12px;
+        color: #111;
+        font-weight: 600;
+        word-break: break-all;
+    }
+
+.status {
+    text-align: center;
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 12px;
+}

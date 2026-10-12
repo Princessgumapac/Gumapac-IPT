@@ -1,0 +1,45 @@
+﻿@page "/info"
+@using GUMAPAC_MAUI.Components.Model
+@using static GUMAPAC_MAUI.Components.Model.MyInfo
+@inject GUMAPAC_MAUI.Components.Enpoint.InfoEndpoints InfoApi
+
+    <div class="section-title">My Information</div>
+    <div class="info-list">
+        <div class="info-item"><span class="icon">👤</span><div><label>Fullname</label><b>@name</b></div></div>
+        <div class="info-item"><span class="icon">🎓</span><div><label>Program</label><b>@program</b></div></div>
+        <div class="info-item"><span class="icon">🔢</span><div><label>Age</label><b>@age</b></div></div>
+        <div class="info-item"><span class="icon">🎂</span><div><label>Birthdate</label><b>@birthdate</b></div></div>
+        <div class="info-item"><span class="icon">📧</span><div><label>Email</label><b>@email</b></div></div>
+        <div class="info-item"><span class="icon">📍</span><div><label>Address</label><b>@address</b></div></div>
+        <div class="info-item"><span class="icon">📞</span><div><label>Contact</label><b>@contact</b></div></div>
+    </div>
+    <p class="status">@status</p>
+
+
+@code {
+    string name = "", birthdate = "", program = "", email = "", address = "", contact = "";
+    string age = "";
+    string status = "Connecting...";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var n = await InfoApi.GetNameAsync();
+            name = n?.Name ?? ""; 
+
+            try { var a = await InfoApi.GetAgeAsync(); age = a?.Age.ToString() ?? ""; } catch { age = "-"; }
+            try { var b = await InfoApi.GetBirthDateAsync(); birthdate = b?.BirthDate ?? ""; } catch { birthdate = "-"; }
+            try { var p = await InfoApi.GetProgramAsync(); program = p?.Program ?? ""; } catch { program = "-"; }
+            try { var e = await InfoApi.GetEmailAsync(); email = e?.Email ?? ""; } catch { email = "-"; }
+            try { var ad = await InfoApi.GetAddressAsync(); address = ad?.Address ?? ""; } catch { address = "-"; }
+            try { var c = await InfoApi.GetContactAsync(); contact = c?.Contact ?? ""; } catch { contact = "-"; }
+
+            status = "API Connected ✓ - " + name;
+        }
+        catch (Exception ex)
+        {
+            status = "Error: " + ex.Message;
+        }
+    }
+}
